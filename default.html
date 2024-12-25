@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Multi-Function Calculator</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        background-color: #f0f0f0;
+        margin: 0;
+        padding: 0;
+      }
+      .calculator {
+        margin: 30px auto;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        width: 300px;
+      }
+      input[type="number"],
+      input[type="text"] {
+        width: calc(100% - 20px);
+        margin: 10px 0;
+        padding: 8px;
+        font-size: 16px;
+        text-align: center;
+      }
+      .operations {
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      .operations,
+      .buttons {
+        margin: 10px 0;
+      }
+      .operations label {
+        margin: 0 10px;
+      }
+      .buttons button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 5px;
+      }
+      .buttons button:hover {
+        background: #45a049;
+      }
+      .number-pad {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 5px;
+        margin: 10px 0;
+      }
+      .number-pad button {
+        font-size: 18px;
+        padding: 15px;
+        background: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      .number-pad button:hover {
+        background: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Calculator with Radio Buttons -->
+    <div class="calculator">
+      <h2>Calculator with Radio Buttons</h2>
+      <input type="number" id="num1" placeholder="Enter first number" />
+      <input type="number" id="num2" placeholder="Enter second number" />
+      <div class="operations">
+        <label
+          ><input type="radio" name="operation" value="add" checked />
+          Add</label
+        >
+        <label
+          ><input type="radio" name="operation" value="subtract" />
+          Subtract</label
+        >
+        <label
+          ><input type="radio" name="operation" value="multiply" />
+          Multiply</label
+        >
+        <label
+          ><input type="radio" name="operation" value="divide" /> Divide</label
+        >
+      </div>
+      <div class="buttons">
+        <button class="" id="calculateRadio">Calculate</button>
+      </div>
+      <input type="text" id="result1" readonly />
+    </div>
+
+    <!-- Calculator with Buttons -->
+    <div class="calculator">
+      <h2>Calculator with Buttons</h2>
+      <input type="number" id="btnNum1" placeholder="Enter first number" />
+      <input type="number" id="btnNum2" placeholder="Enter second number" />
+      <div class="buttons">
+        <button class="calcButton" data-operation="add">Add</button>
+        <button class="calcButton" data-operation="subtract">Subtract</button>
+        <button class="calcButton" data-operation="multiply">Multiply</button>
+        <button class="calcButton" data-operation="divide">Divide</button>
+      </div>
+      <input type="text" id="result2" readonly />
+    </div>
+
+    <!-- Normal Calculator -->
+    <div class="calculator">
+      <h2>Normal Calculator</h2>
+      <input type="text" id="normalDisplay" readonly />
+      <div class="number-pad">
+        <button class="numButton" data-num="7">7</button>
+        <button class="numButton" data-num="8">8</button>
+        <button class="numButton" data-num="9">9</button>
+        <button class="opButton" data-op="divide">÷</button>
+        <button class="numButton" data-num="4">4</button>
+        <button class="numButton" data-num="5">5</button>
+        <button class="numButton" data-num="6">6</button>
+        <button class="opButton" data-op="multiply">×</button>
+        <button class="numButton" data-num="1">1</button>
+        <button class="numButton" data-num="2">2</button>
+        <button class="numButton" data-num="3">3</button>
+        <button class="opButton" data-op="subtract">−</button>
+        <button class="numButton" data-num="0">0</button>
+        <button class="numButton" data-num=".">.</button>
+        <button class="clearButton">C</button>
+        <button class="opButton" data-op="add">+</button>
+        <button class="calcNormalButton">=</button>
+      </div>
+    </div>
+
+    <script>
+      // Calculator with Radio Buttons
+      $("#calculateRadio").click(function () {
+        const num1 = parseFloat($("#num1").val());
+        const num2 = parseFloat($("#num2").val());
+        const operation = $('input[name="operation"]:checked').val();
+        let result;
+
+        if (isNaN(num1) || isNaN(num2)) {
+          result = "Invalid numbers";
+        } else {
+          switch (operation) {
+            case "add":
+              result = num1 + num2;
+              break;
+            case "subtract":
+              result = num1 - num2;
+              break;
+            case "multiply":
+              result = num1 * num2;
+              break;
+            case "divide":
+              result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero";
+              break;
+          }
+        }
+        $("#result1").val(result);
+      });
+
+      // Calculator with Buttons
+      $(".calcButton").click(function () {
+        const num1 = parseFloat($("#btnNum1").val());
+        const num2 = parseFloat($("#btnNum2").val());
+        const operation = $(this).data("operation");
+        let result;
+
+        if (isNaN(num1) || isNaN(num2)) {
+          result = "Invalid numbers";
+        } else {
+          switch (operation) {
+            case "add":
+              result = num1 + num2;
+              break;
+            case "subtract":
+              result = num1 - num2;
+              break;
+            case "multiply":
+              result = num1 * num2;
+              break;
+            case "divide":
+              result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero";
+              break;
+          }
+        }
+        $("#result2").val(result);
+      });
+
+      // Normal Calculator
+      let currentOperation = null;
+      let currentInput = "";
+
+      $(".numButton").click(function () {
+        currentInput += $(this).data("num");
+        $("#normalDisplay").val(currentInput);
+      });
+
+      $(".opButton").click(function () {
+        if (currentInput === "") return;
+        currentOperation = {
+          num1: parseFloat(currentInput),
+          operation: $(this).data("op"),
+        };
+        currentInput = "";
+      });
+
+      $(".calcNormalButton").click(function () {
+        if (!currentOperation || currentInput === "") return;
+        const num1 = currentOperation.num1;
+        const num2 = parseFloat(currentInput);
+        let result;
+
+        switch (currentOperation.operation) {
+          case "add":
+            result = num1 + num2;
+            break;
+          case "subtract":
+            result = num1 - num2;
+            break;
+          case "multiply":
+            result = num1 * num2;
+            break;
+          case "divide":
+            result = num2 !== 0 ? num1 / num2 : "Cannot divide by zero";
+            break;
+        }
+        $("#normalDisplay").val(result);
+        currentInput = "";
+        currentOperation = null;
+      });
+
+      $(".clearButton").click(function () {
+        currentInput = "";
+        currentOperation = null;
+        $("#normalDisplay").val("");
+      });
+    </script>
+  </body>
+</html>
