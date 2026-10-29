@@ -1,0 +1,75 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.calculator {
+  margin: 30px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+input[type="number"],
+input[type="text"] {
+  width: calc(100% - 20px);
+  margin: 10px 0;
+  padding: 8px;
+  font-size: 16px;
+  text-align: center;
+}
+
+.operations {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.operations,
+.buttons {
+  margin: 10px 0;
+}
+
+.operations label {
+  margin: 0 10px;
+}
+
+.buttons button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+.buttons button:hover {
+  background: #45a049;
+}
+
+.number-pad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin: 10px 0;
+}
+
+.number-pad button {
+  font-size: 18px;
+  padding: 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.number-pad button:hover {
+  background: #0056b3;
+}
